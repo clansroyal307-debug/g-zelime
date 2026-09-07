@@ -84,8 +84,8 @@
     <button class="btn" onclick="baslat()">Sürprizi Aç 🎵</button>
   </div>
 
+  <!-- Türkçe karakterli kaynak kaldırıldı, sadece düzgün isimlendirme bırakıldı -->
   <audio id="ses" loop playsinline preload="auto">
-    <source src="müzik.mp3" type="audio/mpeg">
     <source src="muzik.mp3" type="audio/mpeg">
   </audio>
 
@@ -93,14 +93,20 @@
     function baslat() {
       const muzik = document.getElementById('ses');
       
-      muzik.currentTime = 69;
-      
+      // Önce müzik çalma emrini tetikliyoruz
       const playPromise = muzik.play();
+      
       if (playPromise !== undefined) {
         playPromise.then(() => {
+          // Müzik başarılı bir şekilde yüklenip çalmaya başladıktan sonra 69. saniyeye atlatıyoruz
           muzik.currentTime = 69;
         }).catch(error => {
           console.log("Ses oynatma hatası:", error);
+          // Alternatif olarak yüklenme tamamlanmadıysa 'canplay' event'ini bekleyebiliriz
+          muzik.addEventListener('canplay', () => {
+             muzik.play();
+             muzik.currentTime = 69;
+          }, { once: true });
         });
       }
 
