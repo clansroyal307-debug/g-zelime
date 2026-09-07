@@ -85,6 +85,7 @@
   </div>
 
   <audio id="ses" loop playsinline preload="auto">
+    <source src="müzik.mp3" type="audio/mpeg">
     <source src="muzik.mp3" type="audio/mpeg">
   </audio>
 
@@ -92,7 +93,6 @@
     function baslat() {
       const muzik = document.getElementById('ses');
       
-      // Kullanıcı dokunduğu an şarkıyı doğrudan başlatıp 69. saniyeye (1:09) sarar
       muzik.currentTime = 69;
       
       const playPromise = muzik.play();
@@ -104,12 +104,10 @@
         });
       }
 
-      // Ekrandaki yazıyı değiştir
       document.getElementById('baslik').innerText = "Birtanem... 🌸";
       document.getElementById('mesaj').innerText = "Çiçeklerden bile güzel kokan biricik güzel sevgilim, birtanem, her şeyim... Dünyanın en güzel baharı senin gülüşünle başlıyor benim için. 4 mevsimde de hiç solmayan, ömrüme ömür katan en güzel çiçeğimsin benim. İyi ki varsın, seni çok seviyorum... ❤️";
       document.querySelector('.btn').style.display = 'none';
 
-      // Kalp ve çiçek yağmuru
       setInterval(efektOlustur, 250);
     }
 
