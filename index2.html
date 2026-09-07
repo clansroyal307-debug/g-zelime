@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Çiçeklerden Bile Güzel... ❤️</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+      text-align: center;
+      color: #fff;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(10px);
+      padding: 35px 25px;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      max-width: 90%;
+      width: 400px;
+      z-index: 10;
+    }
+    h1 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      color: #fff;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+    }
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+      line-height: 1.6;
+      color: #fff;
+      font-weight: 500;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.15);
+    }
+    .btn {
+      background-color: #ff4b2b;
+      background: linear-gradient(to right, #ff416c, #ff4b2b);
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(255, 75, 43, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn:active {
+      transform: scale(0.95);
+    }
+    .falling-item {
+      position: absolute;
+      top: -30px;
+      animation: fall linear infinite;
+      z-index: 1;
+      user-select: none;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(105vh) rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1 id="baslik">İyi ki Varsın ❤️</h1>
+    <p id="mesaj">Sana küçük bir sürprizim var. Aşağıdaki butona tıklar mısın?</p>
+    <button class="btn" onclick="baslat()">Sürprizi Aç 🎵</button>
+  </div>
+
+  <audio id="ses" loop playsinline preload="auto">
+    <source src="muzik.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    function baslat() {
+      const muzik = document.getElementById('ses');
+      
+      // Kullanıcı dokunduğu an şarkıyı doğrudan başlatıp 69. saniyeye (1:09) sarar
+      muzik.currentTime = 69;
+      
+      const playPromise = muzik.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          muzik.currentTime = 69;
+        }).catch(error => {
+          console.log("Ses oynatma hatası:", error);
+        });
+      }
+
+      // Ekrandaki yazıyı değiştir
+      document.getElementById('baslik').innerText = "Birtanem... 🌸";
+      document.getElementById('mesaj').innerText = "Çiçeklerden bile güzel kokan biricik güzel sevgilim, birtanem, her şeyim... Dünyanın en güzel baharı senin gülüşünle başlıyor benim için. 4 mevsimde de hiç solmayan, ömrüme ömür katan en güzel çiçeğimsin benim. İyi ki varsın, seni çok seviyorum... ❤️";
+      document.querySelector('.btn').style.display = 'none';
+
+      // Kalp ve çiçek yağmuru
+      setInterval(efektOlustur, 250);
+    }
+
+    function efektOlustur() {
+      const eleman = document.createElement('div');
+      eleman.classList.add('falling-item');
+      
+      const simgeler = ['❤️', '🌸', '🌹', '🌷', '✨'];
+      eleman.innerHTML = simgeler[Math.floor(Math.random() * simgeler.length)];
+      
+      eleman.style.left = Math.random() * 100 + 'vw';
+      eleman.style.animationDuration = Math.random() * 3 + 2 + 's';
+      eleman.style.fontSize = Math.random() * 20 + 18 + 'px';
+      document.body.appendChild(eleman);
+
+      setTimeout(() => {
+        eleman.remove();
+      }, 5000);
+    }
+  </script>
+</body>
+</html>
